@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 
 function Home(){
     return (
-        <Card>
+        <Card  >
           <Card.Img src="https://lovetravellingblog.com/wp-content/uploads/2024/04/new-york-header-2.jpg?w=1024" alt="Card image"/>
           <Card.ImgOverlay>
             {/* <Card.Title className='text-white'>

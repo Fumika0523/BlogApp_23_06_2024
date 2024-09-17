@@ -13,15 +13,16 @@ function NavBar() {
   console.log(shouldRenderHeader)
 
   return (
-    <Navbar expand="lg" className="navbar navbar-light bg-light">
+    <Navbar expand="lg" className="navbar navbar-light bg-light mx-4">
       <Container fluid >
-        <Navbar.Brand >Traveling Blog</Navbar.Brand>
+        <Navbar.Brand >Travel Blog✈️🌏</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-na">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/addblog">Add Blog</Nav.Link>
             <Nav.Link as={Link} to="/allblogs">All Blogs</Nav.Link>
+            <Nav.Link as={Link} to="/contactus">Contact us</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
