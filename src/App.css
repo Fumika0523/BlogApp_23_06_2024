@@ -52,12 +52,12 @@ i{
   width: 330px;
   box-sizing: border-box;
 }
-img{
+/* img{
     width: 35px;
     position: absolute;
     top: 30px;
     left: 30px;
-}
+} */
 .input-box header{
     font-weight: 700;
     text-align: center;
