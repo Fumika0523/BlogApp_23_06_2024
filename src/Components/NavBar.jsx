@@ -13,7 +13,7 @@ function NavBar() {
   console.log(shouldRenderHeader)
 
   return (
-    <Navbar expand="lg" className="navbar navbar-light bg-light mx-4">
+    <Navbar expand="lg" className="navbar navbar-light bg-light px-4 sticky-top">
       <Container fluid >
         <Navbar.Brand >Travel Blog✈️🌏</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
