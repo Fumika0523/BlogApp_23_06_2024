@@ -2,9 +2,15 @@ import { useContext, useState } from "react"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Badge from 'react-bootstrap/Badge';
+import { FaPenToSquare } from "react-icons/fa6";
+import { FaTrashAlt } from "react-icons/fa";
 
 
-function BlogCard({title,author,content,photo,setBlogData,id}){
+function BlogCard({title,author,content,photo,setBlogData,id,idx}){
 
   const navigate=useNavigate()
 
@@ -35,30 +41,32 @@ function BlogCard({title,author,content,photo,setBlogData,id}){
 
     return(
         <>
-    <div style={{display:"flex",justifyContent:"center",marginTop:"3%"}}>
-    <Card style={{display:"flex",flexDirection:"row",width:"80%"}}>
-      <Card.Img variant="top" src={photo} style={{width:"300px"}}/>
-      <Card.Body>
-        <div className='d-flex'>
-        <Card.Title className='align-self-center fs-3'>{title}</Card.Title>
 
+  {/* <Col key={idx}> */}
+  <Card style={{width:"28rem"}} >
+      <Card.Img variant="top" src={photo} style={{height:"300px"}} />
+      <Card.Body>
+        <Card.Title >{title}</Card.Title>
+        <div className="d-flex flex-row gap-3">
         {/* DELETE */}
-        <Button className="btn me-4 px-2 ms-auto" variant="secondary" onClick={()=>deleteBlog()}>DELETE This Post</Button>
+        <Button variant="secondary" onClick={()=>deleteBlog()}><FaTrashAlt/>DELETE</Button>
 
         {/* EDIT */}
-        <Button className="btn m-0 px-2" style={{backgroundColor:"navy"}} onClick={()=>navigate(`/editblog/${id}`)}>EDIT This Post</Button>
-
+        <Button  style={{backgroundColor:"navy"}} onClick={()=>navigate(`/editblog/${id}`)}><FaPenToSquare/> EDIT </Button>
         </div>
         <Card.Text className="mt-2">
-        {content}
+        {/* {content} */}
+        {content.substring(0,160).concat("...")}
         </Card.Text>
-        <Card.Link href="#">Read More...</Card.Link>
-        <Card.Text className="mt-2">{author}
+        {/* <Card.Link href="#">Read More...</Card.Link> */}
+        <Card.Text className="mt-2 text-end">{author}
         </Card.Text>
       
       </Card.Body>
+
     </Card>
-    </div> 
+    {/* </Col> */}
+
         </>
     )
 }

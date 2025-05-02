@@ -19,10 +19,10 @@ const getBlogData = async()=>{
   console.log(data)
   setBlogData(data)
 }
-
 useEffect(()=>{
   getBlogData()
-},[]) // API CALL
+},[]) // API CALL Empty dependency,>> only 1 time rendering,
+//  if you pass something, whenever that state changing the api 
 
   return (
     <>
@@ -34,9 +34,7 @@ useEffect(()=>{
         <Route path="/editblog/:id" element={<EditBlog blogData={blogData} setBlogData={setBlogData}/>}/>
         <Route path="/contactus" element={<ContactForm/>}/>
     </Routes>
-
-
-    <Footer />
+    {/* <Footer /> */}
 
     </>
   )

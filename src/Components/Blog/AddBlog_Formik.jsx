@@ -7,7 +7,6 @@ function AddMovie_Formik({setBlogData}){
     const navigate=useNavigate()
     const formSchema=Yup.object().shape({
         title:Yup.string().required().min(5,"Too Short"),
-
         author:Yup.string().required().min(5,"Too Short").max(20,"Author too long"),
 
         photo:Yup.string().required(),
