@@ -7,13 +7,16 @@ import Row from 'react-bootstrap/Row';
 function ContactForm() {
     return (
         <>
-        <div class="wrapper">
-    <div class="container main">
-        <div class="row">
-            <div class="col-md-6 side-image">
+        <div class="container-fluid mt-5  ">
+    <div class=" mx-auto row">
+        <div class="col-lg-8 col-12 mx-auto d-flex justify-content-center" >
+          {/* LEFT IMAGE */}
+            <div class=" col-md-6 d-none d-md-block" style={{borderRadius:"10px"}} >
+              <img src="https://images.unsplash.com/photo-1440778303588-435521a205bc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHZhY2F0aW9ufGVufDB8fDB8fHww"  className=' border-primary border-2' style={{objectFit:"cover", width:"120%",height:"100%"}}/>
             </div>
-            <div class="col-md-6 right">
-                <div class="input-box">
+          {/* RIGHT  */}
+            <div class="col-md-6 col-12 py-3 d-flex align-items-center justify-content-center" style={{backgroundColor:" #ececec"}}>
+                <div class="input-box col-10">
                     <h3 className='mb-4 text-center' style={{color:"grey"}}>Contact us</h3>
                    <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">Name</label>

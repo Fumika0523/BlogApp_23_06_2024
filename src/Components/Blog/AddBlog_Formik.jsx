@@ -2,6 +2,12 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { MdArrowBackIos } from "react-icons/md";
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import { MdOutlineDone } from "react-icons/md";
+import Row from 'react-bootstrap/Row';
 
 function AddMovie_Formik({setBlogData}){
     const navigate=useNavigate()
@@ -67,44 +73,74 @@ console.log(formik)
 
     return(
         <>
-    <div className="mx-auto text-center mt-3">
-        <h2>Add BLOG</h2>
-        {/* onSubmit event */}
-        <form onSubmit={formik.handleSubmit}>
+            <div className="mx-auto text-center mt-5 ">
+                <div className='border border-2 col-11 col-lg-6 col-md-8 mx-auto px-4 py-3 rounded ' >
+                <h2 className='mb-5' style={{color:"rgb(110, 111, 111)"}}>Post a new Blog</h2>
+                {/* onSubmit event */}
+                <Form onSubmit={formik.handleSubmit}>
+                <Row className="mb-3">
+                   {/* Author */}
+                   <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                    <Form.Control
+                    type="text" name="author" id="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}
+                    />
+                        {formik.errors.author && formik.touched.author? (
+                    <div style={{color:"red"}}>{formik.errors.author}</div>
+                ) : null}
 
-            {/* Blog Title */}
-            <input style={addFormDesign} type="text" name="title" id="title" placeholder='Blog Title' onChange={formik.handleChange} value={formik.values.title}/><br />
-            {formik.errors.title && formik.touched.title? (
-             <div style={{color:"red"}}>{formik.errors.title}</div>
-           ) : null}
+                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                
+                {/* Blog Content */}
+                <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                    <Form.Control
+                    type="text" name="content" id="content" placeholder='Content' onChange={formik.handleChange} value={formik.values.content}
+                    />
+                    {formik.errors.content && formik.touched.content? (
+                    <div style={{color:"red"}}>{formik.errors.content}</div>
+                ) : null}
+                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
 
-            {/* Blog Photo */}
-            <input style={addFormDesign} type="text" name="photo" id="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo} /> <br />
-            {formik.errors.photo && formik.touched.photo? (
-             <div style={{color:"red"}}>{formik.errors.photo}</div>
-           ) : null}
+             
+                </Row>
+                <Row className="mb-3">
+                    {/* Title */}
+                <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                    <Form.Control
+                    type='text' name="title" id="title" placeholder='Title' onChange={formik.handleChange} value={formik.values.title}
+                    />
+                    {formik.errors.title && formik.touched.title? (
+                    <div style={{color:"red"}}>{formik.errors.title}</div>
+                ) : null}
+                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
 
-            {/* Blog Content */}
-            <input style={addFormDesign} type="text" name="content" id="content" placeholder='Content' onChange={formik.handleChange} value={formik.values.content}/> <br />
-            {formik.errors.content && formik.touched.content? (
-             <div style={{color:"red"}}>{formik.errors.content}</div>
-           ) : null}
+                {/* Image */}
+                <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                    <Form.Control
+                    type="text" name="photo" id="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo}
+                    />
+                        {formik.errors.photo && formik.touched.photo? (
+                    <div style={{color:"red"}}>{formik.errors.photo}</div>
+                ) : null}
 
-            {/* Blog Author */}
-            <input style={addFormDesign} type="text" name="author" id="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}/> <br />
-            {formik.errors.author && formik.touched.author? (
-             <div style={{color:"red"}}>{formik.errors.author}</div>
-           ) : null}        
-     
+                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                </Row>
+             
+                <div className='d-flex flex-row justify-content-end gap-2'>
+                    {/* ADD MOVIE */}
+                    <Button type="submit" variant="success" 
+                    className='d-flex align-items-center justify-content-center flex-row gap-1'><MdOutlineDone className='fs-6'/>Post</Button>
 
-            {/* ADD MOVIE */}
-            <button  type="submit" className='btn btn-warning mx-3'>ADD BLOG</button>
-
-            {/* Back */}
-            <button  type="submit" className='btn btn-warning mx-3' onClick={()=>{navigate('/allblogs')}}>BACK</button>
-       
-        </form>
-    </div>
+                    {/* Back */}
+                    <Button  type="submit" className='d-flex align-items-center justify-content-center flex-row'
+                    onClick={()=>{navigate('/allblogs')}}><MdArrowBackIos className='fs-6'/>Back</Button>
+                </div>
+                </Form>
+                </div>
+            </div>
         </>
     )
 }
