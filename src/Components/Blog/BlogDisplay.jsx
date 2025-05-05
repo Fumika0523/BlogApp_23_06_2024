@@ -5,33 +5,22 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function BlogDisplay({blogData,setBlogData}){
-
+//if you not passing from App.jsx >> create a useState here. >> Api call is needed
 const [searchTerm,setSearchTerm] = useState("") //initial value
 const [filterBlogData,setFilterBlogData] = useState([])
-console.log("filterBlogData",filterBlogData)
+// console.log("filterBlogData",filterBlogData)
 console.log("blogData",blogData)
 
   const fetchData = (searchTerm)=>{
     console.log("Searching For",searchTerm)
     //apil call
-    const filterData =(searchText,allblogs)=>{
-      console.log("searchText",searchText,"allblogs",allblogs)
-      let fData = allblogs.filter((element)=>element.title.toLowerCase().includes(searchTerm.toLowerCase()))
-       return fData
+    const filterData=(searchText,allBlogs)=>{
+      return allBlogs.filter((element)=>
+        element.title.toLowerCase().includes(searchText.toLowerCase()) //searching by element.title >> JSON structure always review
+      )
     }
+    return filterData(searchTerm,blogData)
   }
-  console.log("searchTerm",searchTerm)
-
-  // const debounce = (fun,delay)=>{ //1
-  //   let timeoutId;
-  //   return function (args){
-  //     clearTimeout(timeoutId)
-  //     timeoutId=setTimeout(()=>fun(args),delay) 
-  //} } 
-  // const debounceFetch = debounce(fetchData,900)
-    // console.log(debounceFetch)
-    // debounceFetch("Hello")
-// console.log("searchTerm",searchTerm)
 
 // 2 useEffect is needed. another function is to just console 
 
@@ -39,10 +28,15 @@ useEffect(()=>{
   // console.log("Mounted a component")
   const timeoutId = setTimeout(()=>{
     //fetchData >> searchTerm is not empty // additional spaces trim("")
-    if(searchTerm.trim()!==""){
+    if(searchTerm.trim()!==""){ //not empty
      const fData = fetchData(searchTerm)
      setFilterBlogData(fData)
-    }},900)
+    }else{ //empty
+      setFilterBlogData(blogData) //reset to all blogs if search is empty
+      console.log("Re-render with searchTerm")
+      //searchTerm >> search reupdated >> depenedency Array >> re-render whenever you are typing in seach box  >> blog data  will be updated >> filteration >> .filter
+    }
+  },900)
     //clearTimer
     //clear unmounting >> LifeCycle of an component
     return()=>{
@@ -54,6 +48,7 @@ useEffect(()=>{
 useEffect(()=>{
 if (blogData){
   setFilterBlogData(blogData)
+  console.log("iitial render")
 }
 },[blogData])
 
@@ -65,7 +60,7 @@ if (blogData){
       </div>
        <Row className="mx-auto  border-4 border-primary" >
           {
-          blogData?.map((element,index)=>(
+          filterBlogData?.map((element,index)=>(
             <BlogCard {...element} key={index} setBlogData={setBlogData}/>
           ))
           }

@@ -144,3 +144,11 @@ span a:hover{
     color: #000;
 }
 
+body {
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark-mode {
+    background-color: #031937;
+    color: white !important;
+  }
