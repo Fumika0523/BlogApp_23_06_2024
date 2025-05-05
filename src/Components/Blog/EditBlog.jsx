@@ -2,6 +2,13 @@ import React,{Suspense, useEffect,useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { MdArrowBackIos } from "react-icons/md";
+import { MdOutlineDone } from "react-icons/md";
+
 
 function EditBlog({setBlogData}){//setBlogData is for entire data
 const [singleBlog, setSingleBlog]=useState()
@@ -25,7 +32,6 @@ return(
 <>
 {
         singleBlog?
-     
         <EditBlogForm singleBlog={singleBlog} id={id} setBlogData={setBlogData}/>//LOAD WHEN API COMPLETED
         :
         <p>Loading..........</p>//When API CALL IS RUNNING
@@ -41,8 +47,8 @@ function EditBlogForm({singleBlog,id,setBlogData}){
         borderColor:"grey",
         marginBottom:"20px",
     }
-
     const navigate=useNavigate()
+    
     const formSchema=Yup.object().shape({
         title:Yup.string().required("**Title filed is mandatory").min(3,"**title should contain minimum 3 letters"),
         author:Yup.string().required("**Author filed is mandatory").min(5,"**author should contain minimum 5 letters").max(20,"**Author should not be more than 20 letters"),
@@ -65,6 +71,16 @@ function EditBlogForm({singleBlog,id,setBlogData}){
     })
     console.log(formik)
 
+//updating a data to browser, once again to get a entire Data
+const getBlogData=async()=>{
+    console.log("Blog data is called....")
+    let res=await fetch('https://66760c9da8d2b4d072f24534.mockapi.io/movie/Blog')//API call to get all Blog Data
+    let data = await res.json()//responding in string, convert into json format
+    console.log(data)
+    setBlogData(data)
+}
+
+
 const updateBlogs=async(Blogupdate)=>{
     console.log("Blog Posted to the DB")
     console.log("UPDATE BLOG:",Blogupdate)
@@ -80,56 +96,86 @@ const updateBlogs=async(Blogupdate)=>{
         })
         let data = await res.json()
         console.log(data)
+        // setBlogData(data)
+        if(data){
+            console.log("Updated successfully")
+            getBlogData()
+            navigate(`/allblogs`)
+        }
 }
 
-//updating a data to browser, once again to get a entire Data
-const getBlogData=async()=>{
-    console.log("Blog data is called....")
-    let res=await fetch('https://66760c9da8d2b4d072f24534.mockapi.io/movie/Blog')//API call to get all Blog Data
-    let data = await res.json()//responding in string, convert into json format
-    console.log(data)
-    setBlogData(data)//
-}
 
 return(
     <>
-<form onSubmit={formik.handleSubmit} className="mx-5 mt-3">
-<h2 >Edit Blog</h2>
-
-{/* Blog Title */}
-<input className="rounded" style={addFormDesign} type="text" name="title" id="title" placeholder='Blog Title' onChange={formik.handleChange} value={formik.values.title}/>{formik.errors.title && formik.touched.title? (
- <div style={{color:"red",display:"inline-flex",marginLeft:"10px"}}>{formik.errors.title.toUpperCase()}</div>
-) : null}
-<br />
-
-{/* Blog Photo */}
-<input className="rounded" style={addFormDesign} type="text" name="photo" id="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo} />
-{formik.errors.photo && formik.touched.photo? (
- <div style={{color:"red",display:"inline-block",marginLeft:"10px"}}>{formik.errors.photo.toUpperCase()}</div>
-) : null} <br />
-
-{/* Blog Content */}
-<input className="rounded" style={addFormDesign} type="text" name="content" id="content" placeholder='Content' onChange={formik.handleChange} value={formik.values.content}/> 
-{formik.errors.content && formik.touched.content? (
- <div style={{color:"red",display:"inline-block",marginLeft:"10px"}}>{formik.errors.content.toUpperCase()}</div>
-) : null}<br />
-
-{/* Blog Author */}
-<input className="rounded" style={addFormDesign} type="text" name="author" id="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}/>
-{formik.errors.author && formik.touched.author? (
- <div style={{color:"red",display:"inline-block",marginLeft:"10px"}}>{formik.errors.author.toUpperCase()}</div>
-) : null}  <br />
-
-{/* ADD MOVIE */}
-<button  type="submit" className='btn btn-warning mx-3'>UPDATE BLOG</button>
-
-{/* Back */}
-<button  type="submit" className='btn btn-warning mx-3' onClick={()=>{
-    getBlogData()
-    navigate('/allblogs')}}>BACK</button>
-    {/* all the blogs will be called by getBlogData() */}
-
-</form>
+    <div className="container-fluid border-4" >
+        <div className="row mx-auto" style={{marginTop:"10%"}}>
+            <div className="col-lg-6 col-md-8 col-sm-10 col-11 border border-2 mx-auto px-5 py-3" style={{borderRadius:"10px"}}>
+                <h2>Edit Blog</h2>
+            <Form onSubmit={formik.handleSubmit}>
+                <Row className="mb-3">
+                                   {/* Author */}
+                                   <Form.Group as={Col} md="6" controlId="formBasicAuthor" className='mb-3 position-relative'>
+                                    <Form.Control
+                                    type="text" name="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}
+                                    />
+                                        {formik.errors.author && formik.touched.author? (
+                                    <div style={{color:"red"}}>{formik.errors.author}</div>
+                                ) : null}
+                
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                       
+                                {/* Title */}
+                                <Form.Group as={Col} md="6" controlId="formBasicTitle" className='position-relative'>
+                                <Form.Control
+                                    type='text' name="title"  placeholder='Title' onChange={formik.handleChange} value={formik.values.title}
+                                    />
+                                    {formik.errors.title && formik.touched.title? (
+                                    <div style={{color:"red"}}>{formik.errors.title}</div>
+                                ) : null}
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                             
+                </Row>
+                <Row className="mb-3">
+                                         
+                {/* Blog Content */}
+                <Form.Group as={Col} md="6" controlId="formBasicContent" className='mb-3 position-relative'>
+                                    <Form.Control
+                                    type="text" name="content"  placeholder='Content' onChange={formik.handleChange} value={formik.values.content}
+                                    />
+                                    {formik.errors.content && formik.touched.content? (
+                                    <div style={{color:"red"}}>{formik.errors.content}</div>
+                                ) : null}
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                
+                 {/* Image */}
+                <Form.Group as={Col} md="6" controlId="formBasicImage" className='position-relative'>
+                                    <Form.Control
+                                    type="text" name="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo}
+                                    />
+                                        {formik.errors.photo && formik.touched.photo? (
+                                    <div style={{color:"red"}}>{formik.errors.photo}</div>
+                                ) : null}
+                
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                 </Form.Group>
+                </Row>
+                             
+                <div className='d-flex flex-row justify-content-end gap-2'>
+                                    {/* ADD MOVIE */}
+                                    <Button type="submit" variant="success" 
+                                    className='d-flex align-items-center justify-content-center flex-row gap-1'><MdOutlineDone className='fs-6'/>Post</Button>
+                
+                                    {/* Back */}
+                                    <Button  type="submit" className='d-flex align-items-center justify-content-center flex-row'
+                                    onClick={()=>{navigate('/allblogs')}}><MdArrowBackIos className='fs-6'/>Back</Button>
+                </div>
+            </Form>
+            </div>
+        </div>
+    </div>
 
     </>
 )

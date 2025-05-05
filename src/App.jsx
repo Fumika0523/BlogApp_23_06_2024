@@ -24,15 +24,26 @@ useEffect(()=>{
 },[]) // API CALL Empty dependency,>> only 1 time rendering,
 //  if you pass something, whenever that state changing the api 
 
+const [mode,setMode] = useState("light")
+const toggleMode = () =>{
+  if(mode === "light"){
+    setMode("dark")
+    document.body.style.backgroundColor = "#042045"
+  }else{
+    setMode("light")
+    document.body.style.backgroundColor = "#fff8e6"
+  }
+}
+
   return (
     <>
-    <NavBar/>
+    <NavBar mode={mode} toggleMode={toggleMode}/>
     <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path='/allblogs' element={<BlogDisplay blogData={blogData} setBlogData={setBlogData}/>}/>
-        <Route path='/addblog' element={<AddBlog_Formik setBlogData={setBlogData}/>}/>
-        <Route path="/editblog/:id" element={<EditBlog blogData={blogData} setBlogData={setBlogData}/>}/>
-        <Route path="/contactus" element={<ContactForm/>}/>
+        <Route path="/" element={<HomePage mode={mode} toggleMode={toggleMode}/>}/>
+        <Route path='/allblogs' element={<BlogDisplay blogData={blogData} setBlogData={setBlogData} mode={mode} toggleMode={toggleMode}/>}/>
+        <Route path='/addblog' element={<AddBlog_Formik setBlogData={setBlogData} mode={mode} toggleMode={toggleMode}/>}/>
+        <Route path="/editblog/:id" element={<EditBlog blogData={blogData} setBlogData={setBlogData} mode={mode} toggleMode={toggleMode}/>}/>
+        <Route path="/contactus" element={<ContactForm mode={mode} toggleMode={toggleMode}/>}/>
     </Routes>
     {/* <Footer /> */}
 

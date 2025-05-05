@@ -73,16 +73,16 @@ console.log(formik)
 
     return(
         <>
-            <div className="mx-auto text-center mt-5 ">
+            <div className="mx-auto text-center " style={{marginTop:"10%"}}>
                 <div className='border border-2 col-11 col-lg-6 col-md-8 mx-auto px-4 py-3 rounded ' >
                 <h2 className='mb-5' style={{color:"rgb(110, 111, 111)"}}>Post a new Blog</h2>
                 {/* onSubmit event */}
                 <Form onSubmit={formik.handleSubmit}>
                 <Row className="mb-3">
                    {/* Author */}
-                   <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                   <Form.Group as={Col} md="6" controlId="formBasicAuthor" className='mb-3 position-relative'>
                     <Form.Control
-                    type="text" name="author" id="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}
+                    type="text" name="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}
                     />
                         {formik.errors.author && formik.touched.author? (
                     <div style={{color:"red"}}>{formik.errors.author}</div>
@@ -90,11 +90,25 @@ console.log(formik)
 
                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-                
+       
+                {/* Title */}
+                <Form.Group as={Col} md="6" controlId="formBasicTitle" className='position-relative'>
+                <Form.Control
+                    type='text' name="title"  placeholder='Title' onChange={formik.handleChange} value={formik.values.title}
+                    />
+                    {formik.errors.title && formik.touched.title? (
+                    <div style={{color:"red"}}>{formik.errors.title}</div>
+                ) : null}
+                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+             
+                </Row>
+                <Row className="mb-3">
+                         
                 {/* Blog Content */}
-                <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                <Form.Group as={Col} md="6" controlId="formBasicContent" className='mb-3 position-relative'>
                     <Form.Control
-                    type="text" name="content" id="content" placeholder='Content' onChange={formik.handleChange} value={formik.values.content}
+                    type="text" name="content"  placeholder='Content' onChange={formik.handleChange} value={formik.values.content}
                     />
                     {formik.errors.content && formik.touched.content? (
                     <div style={{color:"red"}}>{formik.errors.content}</div>
@@ -102,24 +116,10 @@ console.log(formik)
                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                 </Form.Group>
 
-             
-                </Row>
-                <Row className="mb-3">
-                    {/* Title */}
-                <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
-                    <Form.Control
-                    type='text' name="title" id="title" placeholder='Title' onChange={formik.handleChange} value={formik.values.title}
-                    />
-                    {formik.errors.title && formik.touched.title? (
-                    <div style={{color:"red"}}>{formik.errors.title}</div>
-                ) : null}
-                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-
                 {/* Image */}
-                <Form.Group as={Col} md="6" controlId="validationFormik101" className='position-relative'>
+                <Form.Group as={Col} md="6" controlId="formBasicImage" className='position-relative'>
                     <Form.Control
-                    type="text" name="photo" id="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo}
+                    type="text" name="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo}
                     />
                         {formik.errors.photo && formik.touched.photo? (
                     <div style={{color:"red"}}>{formik.errors.photo}</div>

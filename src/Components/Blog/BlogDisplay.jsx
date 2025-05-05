@@ -57,15 +57,13 @@ if (blogData){
 }
 },[blogData])
 
-
-
     return(
         <>
-    <Container fluid className="border border-danger border-4 min-vh-100">
+    <Container fluid className=" border-danger border-4 min-vh-100">
       <div className='text-end mb-3 w-100 justify-content-end d-flex mt-4 border-4'>
       <input className='' type='search' name='' placeholder="Search blog..." id="search" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/>
       </div>
-       <Row className="mx-auto border border-4 border-primary" >
+       <Row className="mx-auto  border-4 border-primary" >
           {
           blogData?.map((element,index)=>(
             <BlogCard {...element} key={index} setBlogData={setBlogData}/>

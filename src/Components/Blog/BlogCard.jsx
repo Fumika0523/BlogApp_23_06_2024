@@ -37,7 +37,7 @@ function BlogCard({title,author,content,photo,setBlogData,id,idx}){
     return(
     <>
      <Col lg={3} md={4} sm={6} xs={12} key={idx} className="mb-5">
-      <Card className="h-100" style={{cursor:"pointer"}}>
+      <Card className="h-100 border-0" style={{cursor:"pointer"}}>
             <Card.Img variant="top" src={photo} style={{width:"100%",height:"200px",objectFit:"cover"}}/>
               <Card.Body>
               <Card.Title className='fw-bold' >{title}</Card.Title>

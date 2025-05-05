@@ -17,7 +17,7 @@ function ContactForm() {
           {/* RIGHT  */}
             <div class="col-md-6 col-12 py-3 d-flex align-items-center justify-content-center" style={{backgroundColor:" #ececec"}}>
                 <div class="input-box col-10">
-                    <h3 className='mb-4 text-center' style={{color:"grey"}}>Contact us</h3>
+                    <h2 className='mb-4 text-center' style={{color:"grey"}}>Contact us</h2>
                    <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">Name</label>
                     <input type="text" class="form-control" id="formGroupExampleInput" placeholder=""/>

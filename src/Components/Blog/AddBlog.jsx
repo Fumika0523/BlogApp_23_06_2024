@@ -5,7 +5,7 @@ function AddBlog(){
    
     return(
         <>
-        <div className='text-center'>
+        <div className='text-center border border-4 mt-5 border-primary'>
             <h2 className="m-4">Add Blog</h2>
             <input className="border rounded mb-4" type="text" name="" id="" placeholder="Title" style={{width:"400px"}}/><br />
             <input type="text " className="border rounded mb-4" placeholder='Photo' style={{width:"400px"}}/><br />
