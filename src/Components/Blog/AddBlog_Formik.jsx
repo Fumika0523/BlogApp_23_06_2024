@@ -8,27 +8,21 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { MdOutlineDone } from "react-icons/md";
 import Row from 'react-bootstrap/Row';
+import { useContext } from 'react';
+import { ThemeContext } from '../../ThemeContext'
+import { BsFillPostcardFill } from "react-icons/bs";
+
 
 function AddMovie_Formik({setBlogData}){
     const navigate=useNavigate()
     const formSchema=Yup.object().shape({
         title:Yup.string().required().min(5,"Too Short"),
         author:Yup.string().required().min(5,"Too Short").max(20,"Author too long"),
-
         photo:Yup.string().required(),
-
         content:Yup.string().required().min(5,"Too Short").max(450,"Content Too long"),    
     })
 
-    // Style
-    const addFormDesign={
-        height:"40px",
-        width:"50%",
-        borderColor:"grey",
-        marginBottom:"20px",
-    }
-
-    const formik=useFormik({
+      const formik=useFormik({
         initialValues:{
             title:"",
             author:"",
@@ -70,17 +64,26 @@ console.log(formik)
         console.log(data)
         setBlogData(data)
     }
+      const {darkMode} =useContext(ThemeContext)
+    
 
     return(
         <>
             <div className="mx-auto text-center " style={{marginTop:"10%"}}>
-                <div className='border border-2 col-11 col-lg-6 col-md-8 mx-auto px-4 py-3 rounded ' >
-                <h2 className='mb-5' style={{color:"rgb(110, 111, 111)"}}>Post a new Blog</h2>
+                <div className='border border-1 border-secondary  col-11 col-lg-5 col-md-8 col-sm-10 mx-auto px-4 py-3 rounded shadow '
+                 style={{ backgroundColor: darkMode ? "rgb(2, 22, 49)" : "rgb(249, 249, 244)"}}
+                // style={{backgroundColor:"rgb(249, 249, 244)"}}
+                 >
+                <h3 className='mb-5 d-flex gap-2 flex-row align-items-center justify-content-center' 
+                 style={{ color: darkMode ? "rgb(248, 248, 190)" : "black"}}>
+                    <BsFillPostcardFill style={{ color: darkMode ? "rgb(103, 194, 214)" : "black"}} className='fs-1'/>Post a new Blog</h3>
+
                 {/* onSubmit event */}
                 <Form onSubmit={formik.handleSubmit}>
                 <Row className="mb-3">
+
                    {/* Author */}
-                   <Form.Group as={Col} md="6" controlId="formBasicAuthor" className='mb-3 position-relative'>
+                   <Form.Group as={Col} sm="6" controlId="formBasicAuthor" className='mb-3 position-relative'>
                     <Form.Control
                     type="text" name="author" placeholder='Author' onChange={formik.handleChange} value={formik.values.author}
                     />
@@ -92,21 +95,32 @@ console.log(formik)
                 </Form.Group>
        
                 {/* Title */}
-                <Form.Group as={Col} md="6" controlId="formBasicTitle" className='position-relative'>
+                <Form.Group as={Col} sm="6" controlId="formBasicTitle" className='position-relative'>
                 <Form.Control
-                    type='text' name="title"  placeholder='Title' onChange={formik.handleChange} value={formik.values.title}
-                    />
-                    {formik.errors.title && formik.touched.title? (
-                    <div style={{color:"red"}}>{formik.errors.title}</div>
+                type='text' name="title"  placeholder='Title' onChange={formik.handleChange} value={formik.values.title}
+                />
+                {formik.errors.title && formik.touched.title? (
+                <div style={{color:"red"}}>{formik.errors.title}</div>
                 ) : null}
                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-             
                 </Row>
                 <Row className="mb-3">
-                         
+         
+                      {/* Image */}
+                      <Form.Group as={Col}  controlId="formBasicImage" className='position-relative'>
+                    <Form.Control
+                    type="text" name="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo}
+                    />
+                        {formik.errors.photo && formik.touched.photo? (
+                    <div style={{color:"red"}}>{formik.errors.photo}</div>
+                ) : null}
+                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                </Row>
+                <Row className="mb-3">
                 {/* Blog Content */}
-                <Form.Group as={Col} md="6" controlId="formBasicContent" className='mb-3 position-relative'>
+                <Form.Group as={Col} controlId="formBasicContent" className='mb-3 position-relative'>
                     <Form.Control
                     type="text" name="content"  placeholder='Content' onChange={formik.handleChange} value={formik.values.content}
                     />
@@ -115,27 +129,17 @@ console.log(formik)
                 ) : null}
                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                 </Form.Group>
-
-                {/* Image */}
-                <Form.Group as={Col} md="6" controlId="formBasicImage" className='position-relative'>
-                    <Form.Control
-                    type="text" name="photo" placeholder="Photo URL" onChange={formik.handleChange} value={formik.values.photo}
-                    />
-                        {formik.errors.photo && formik.touched.photo? (
-                    <div style={{color:"red"}}>{formik.errors.photo}</div>
-                ) : null}
-
-                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
-                </Form.Group>
                 </Row>
              
-                <div className='d-flex flex-row justify-content-end gap-2'>
+                <div className='d-flex flex-row justify-content-end gap-3'>
                     {/* ADD MOVIE */}
-                    <Button type="submit" variant="success" 
-                    className='d-flex align-items-center justify-content-center flex-row gap-1'><MdOutlineDone className='fs-6'/>Post</Button>
+                    <Button type="submit" 
+                    className='d-flex border-0 postBtn align-items-center stify-content-center flex-row gap-1' ><MdOutlineDone className='fs-5'/>Post</Button>
 
                     {/* Back */}
-                    <Button  type="submit" className='d-flex align-items-center justify-content-center flex-row'
+                    <Button 
+                    variant='secondary'
+                    type="submit" className='d-flex border-0 align-items-center justify-content-center flex-row'
                     onClick={()=>{navigate('/allblogs')}}><MdArrowBackIos className='fs-6'/>Back</Button>
                 </div>
                 </Form>

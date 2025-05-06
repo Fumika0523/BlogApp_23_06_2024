@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import ThemeToggle from "../ThemeToggle";
 import { useContext } from 'react';
 import { ThemeContext } from '../ThemeContext';
+import { BsFillPostcardFill } from "react-icons/bs";
 
 
 function NavBar() {
@@ -23,25 +24,30 @@ function NavBar() {
   const {darkMode} =useContext(ThemeContext)
 
   return (
-    <Navbar expand="lg" className="navbarpx-4 sticky-top" >
-      <Container fluid className='border border-4' >
-        <Navbar.Brand className='fw-bold' style={{ color: darkMode ? "yellow" : "black"}}>Travel Blog✈️🌏</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar  expand="lg" className="navbar shadow-sm sticky-top" style={{ backgroundColor: darkMode ? "rgb(2, 22, 49)" : "rgb(252, 252, 250)"}} >
+      <Container fluid className=' border-4' >
+        <Navbar.Brand className='fw-bold' style={{ color: darkMode ? "rgb(244, 215, 73)" : "black"}}>Travel Blog✈️🌏</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='me-5'/>
         <Navbar.Collapse id="basic-navbar-na" >
-          <Nav className="ms-auto ">
+          <Nav className="ms-auto me-5 d-flex align-items-start justify-content-start">
             {/* Home */}
-            <Nav.Link as={Link} to="/" className={`d-flex align-items-center gap-1 `} style={{ color: darkMode ? "yellow" : "black"}}><FaHome className='fs-5' />Home</Nav.Link>
-            {/* Add */}
-            <Nav.Link as={Link} to="/addblog" className={`d-flex align-items-center gap-1 `} style={{ color: darkMode ? "yellow" : "black"}}><PiNotePencilBold className='fs-5' style={{ color: darkMode ? "yellow" : "black"}}/>Post </Nav.Link>
+            <Nav.Link as={Link} to="/" className={`d-flex align-items-center gap-1 navLink `} style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}}><FaHome className='fs-4' />Home</Nav.Link>
+
             {/* All Blog */}
-            <Nav.Link as={Link} to="/allblogs" className={`d-flex align-items-center gap-1 `} style={{ color: darkMode ? "yellow" : "black"}}><FaHeart className='fs-5' style={{ color: darkMode ? "yellow" : "black"}} />All Blogs</Nav.Link>
+            <Nav.Link as={Link} to="/allblogs" className={`d-flex align-items-center gap-1 navLink `} style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}}><FaHeart className='fs-5'  />All Blogs</Nav.Link>
+
+              {/* Add */}
+              <Nav.Link as={Link} to="/addblog" className={`d-flex align-items-center gap-1 navLink`} style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}}><BsFillPostcardFill className='fs-4' />Post </Nav.Link>
+
             {/* Contact */}
-            <Nav.Link as={Link} to="/contactus" style={{ color: darkMode ? "yellow" : "black"}} className={`d-flex align-items-center gap-1 `}><IoIosSend className='fs-4' style={{ color: darkMode ? "yellow" : "black"}} />Contact</Nav.Link>
+            <Nav.Link as={Link} to="/contactus" style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}} className={`gap-1 d-flex align-items-center navLink `}><IoIosSend className='fs-4'  />Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
 
-        
-           <ThemeToggle />
+          <div className='position-absolute' style={{right:"3px",top:"7px"}} >
+          <ThemeToggle />
+          </div>
+          
       </Container>
     </Navbar>
   );

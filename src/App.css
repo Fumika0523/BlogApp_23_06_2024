@@ -149,6 +149,55 @@ body {
   }
   
   body.dark-mode {
-    background-color: #031937;
+    background-color: rgb(1, 14, 32);
     color: white !important;
   }
+
+  .navLink:hover{
+    transform: scale(1.02);
+    transition: all .4s ease-in-out;
+  }
+
+  .postBtn {
+   background-color:rgb(138, 203, 138) !important;
+   color:rgb(3, 51, 10) !important
+  }
+
+  .postBtn:hover{
+    background-color:rgba(102, 220, 102, 0.871) !important;
+    color:rgb(1, 73, 1) !important
+  }
+
+.editBtn{
+    background-color:rgba(42, 211, 42, 0.54) !important ;
+    color:rgb(4, 116, 4) !important;
+}
+
+.editBtn:hover{
+    background-color:rgb(91, 232, 91) !important;
+    color:rgb(1, 73, 1) !important;
+    transform: scale(1.05);
+    transition: all .4s ease-in-out;
+}
+
+.deleteBtn{
+    background-color:rgba(244, 3, 3, 0.5) !important;
+    color:rgb(218, 5, 5)!important;
+}
+
+.deleteBtn:hover{
+    background-color:rgb(254, 98, 98) !important;
+    color:rgb(187, 2, 2)!important;
+    transform: scale(1.05);
+    transition: all .4s ease-in-out;
+}
+
+.navbar-toggler {
+    border-color: rgba(120, 130, 144, 0.808) !important; /* Change to your desired color */
+  }
+
+  .navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(120, 130, 144, 0.808) ' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  
+  
