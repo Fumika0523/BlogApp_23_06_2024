@@ -26,7 +26,7 @@ function NavBar() {
   return (
     <Navbar  expand="lg" className="navbar shadow-sm sticky-top" style={{ backgroundColor: darkMode ? "rgb(2, 22, 49)" : "rgb(252, 252, 250)"}} >
       <Container fluid className=' border-4' >
-        <Navbar.Brand className='fw-bold' style={{ color: darkMode ? "rgb(244, 215, 73)" : "black"}}>Travel Blog✈️🌏</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className='fw-bold' style={{ color: darkMode ? "rgb(244, 215, 73)" : "black"}} >Travel Blog✈️🌏</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className='me-5'/>
         <Navbar.Collapse id="basic-navbar-na" >
           <Nav className="ms-auto me-5 d-flex align-items-start justify-content-start">
@@ -40,7 +40,7 @@ function NavBar() {
               <Nav.Link as={Link} to="/addblog" className={`d-flex align-items-center gap-1 navLink`} style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}}><BsFillPostcardFill className='fs-4' />Post </Nav.Link>
 
             {/* Contact */}
-            <Nav.Link as={Link} to="/contactus" style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}} className={`gap-1 d-flex align-items-center navLink `}><IoIosSend className='fs-4'  />Contact</Nav.Link>
+            <Nav.Link as={Link} to="/contactus" style={{ color: darkMode ? "rgb(243, 243, 170)" : "black"}} className={`gap-1 d-flex align-items-center navLink `}><IoIosSend className='fs-3'  />Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
 

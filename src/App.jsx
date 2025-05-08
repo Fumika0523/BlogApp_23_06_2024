@@ -10,8 +10,6 @@ import ContactForm from "./Components/ContactForm";
 import HomePage from "./Components/HomePage";
 import { ThemeProvider } from "./ThemeContext";
 
-
-
 function App() {
 const [blogData,setBlogData] = useState([])
 
@@ -19,7 +17,7 @@ const getBlogData = async()=>{
   console.log("Blog Data is called...")
   let res = await fetch("https://66760c9da8d2b4d072f24534.mockapi.io/movie/Blog")
   let data = await res.json()
-  console.log(data)
+  console.log("data",data)
   setBlogData(data)
 }
 useEffect(()=>{
@@ -27,14 +25,13 @@ useEffect(()=>{
 },[]) // API CALL Empty dependency,>> only 1 time rendering,
 //  if you pass something, whenever that state changing the api 
 
-//use contextAPI(React)
+console.log("blogData",blogData)
 
 
   return (
     <>
     <ThemeProvider>
-  
-    <NavBar  />
+     <NavBar  />
     <Routes>
         <Route path="/" element={<HomePage  />}/>
         <Route path='/allblogs' element={<BlogDisplay blogData={blogData} setBlogData={setBlogData}  />}/>

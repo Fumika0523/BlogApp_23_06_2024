@@ -3,13 +3,15 @@ import BlogCard from './BlogCard'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ModalViewBlog from './ModalViewBlog';
 
 function BlogDisplay({blogData,setBlogData}){
+  console.log("blogData",blogData)
+
 //if you not passing from App.jsx >> create a useState here. >> Api call is needed
 const [searchTerm,setSearchTerm] = useState("") //initial value
 const [filterBlogData,setFilterBlogData] = useState([])
 // console.log("filterBlogData",filterBlogData)
-console.log("blogData",blogData)
 
   const fetchData = (searchTerm)=>{
     console.log("Searching For",searchTerm)
@@ -51,17 +53,20 @@ if (blogData){
   console.log("iitial render")
 }
 },[blogData])
+console.log("filterBLogData",filterBlogData)
+
 
     return(
         <>
-    <Container fluid className=" border-danger border-4 min-vh-100">
+
+    <Container fluid className=" border-danger min-vh-100">
       <div className='text-end mb-3 w-100 justify-content-end d-flex mt-4 border-4'>
       <input className='' type='search' name='' placeholder="Search blog..." id="search" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}/>
       </div>
        <Row className="mx-auto  border-4 border-primary" >
           {
           filterBlogData?.map((element,index)=>(
-            <BlogCard {...element} key={index} setBlogData={setBlogData}/>
+            <BlogCard {...element} key={index} blogData={blogData} setBlogData={setBlogData} setFilterBlogData={setFilterBlogData} element={element}/>
           ))
           }
         </Row>

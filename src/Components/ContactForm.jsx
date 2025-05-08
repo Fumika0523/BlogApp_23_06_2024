@@ -3,8 +3,13 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { useContext } from 'react';
+import { ThemeContext } from '../ThemeContext';
 
 function ContactForm() {
+
+    const {darkMode} =useContext(ThemeContext)
+
     return (
         <>
         <div class="container-fluid mt-5  ">
@@ -15,7 +20,7 @@ function ContactForm() {
               <img src="https://images.unsplash.com/photo-1440778303588-435521a205bc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHZhY2F0aW9ufGVufDB8fDB8fHww"  className=' border-primary border-2' style={{objectFit:"cover", width:"120%",height:"100%"}}/>
             </div>
           {/* RIGHT  */}
-            <div class="col-md-6 col-12 py-3 d-flex align-items-center justify-content-center" style={{backgroundColor:" #ececec"}}>
+            <div class="col-md-6 col-12 py-3 d-flex align-items-center justify-content-center" style={{backgroundColor:"rgb(229, 243, 247)"}}>
                 <div class="input-box col-10">
                     <h2 className='mb-4 text-center' style={{color:"grey"}}>Contact us</h2>
                    <div class="mb-3">
